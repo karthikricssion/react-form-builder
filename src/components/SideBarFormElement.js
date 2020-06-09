@@ -1,5 +1,5 @@
 import React from 'react';
-import { getMousePosition } from '../../utils';
+import { getMousePosition } from '../utils';
 
 const FormElement = (props) => {
     let formElementRef = React.createRef();
@@ -20,7 +20,7 @@ const FormElement = (props) => {
             ref={formElementRef}
             >
             <img 
-                src={ require(`../../assets/${props.item.imageIconName}.png`) } 
+                src={ require(`../assets/${props.item.imageIconName}.png`) } 
                 alt={props.item.label} 
                 className="img-responsive"
             />

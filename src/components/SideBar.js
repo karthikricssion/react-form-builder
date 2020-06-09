@@ -1,5 +1,5 @@
 import React from 'react';
-import FormElement from './formelement/FormElement'
+import FormElement from './SideBarFormElement'
 
 const SideBar = () => {
     const formUIElements = [
