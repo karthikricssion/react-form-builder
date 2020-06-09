@@ -1,4 +1,21 @@
 import React from 'react';
+import TopBar from './topbar/TopBar';
+import DropFromElement from './dropformelement/DropFormElement';
+
+var getNewformElementObj = function() {
+    return {
+        type: '',
+        pos: {
+            x: 0,
+            y: 0
+        }
+    }
+}
+
+var generateUniqueId = function() {
+    return Math.ceil(Math.random() * 10000000)
+}
+
 
 var getDropPosition = function($this, e) {
     return {
@@ -11,38 +28,108 @@ var getDropPosition = function($this, e) {
     }
 };
 
-const FormBuilder = () => {
-    let dropZoneRef = React.createRef();
+var calculatePositionOfDroppedItem = function(droppedItemPosition, draggedItemPosition) {
+    var dropItemMeasurement = {
+        width: 234,
+        height: 45
+    }
     
-    const dragOver = (e) => {
+    var xPosition = (droppedItemPosition.x - draggedItemPosition.x)
+    var yPosition = (droppedItemPosition.y - draggedItemPosition.y )
+
+    if(xPosition < 0) {
+        xPosition = 8
+    } else if((xPosition + dropItemMeasurement.width) > droppedItemPosition.width) {
+        xPosition = droppedItemPosition.width - dropItemMeasurement.width - 8
+    }
+
+    if(yPosition < 0) {
+        yPosition = 8
+    } else if((yPosition + dropItemMeasurement.height) > droppedItemPosition.height) {
+        yPosition = droppedItemPosition.height - dropItemMeasurement.height - 8
+    }
+
+    return {
+        x: xPosition,
+        y: yPosition
+    }
+}
+
+class FormBuilder extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            droppedItems: []
+        }
+        this.dropZoneRef = React.createRef();
+    }
+
+    dragOver = (e) => {
         e.preventDefault()
     }
 
-    const dragEnter = (e) => {
+    dragEnter = (e) => {
         e.preventDefault()
     }
 
-    const dragLeave = (e) => {
+    dragLeave = (e) => {
         e.preventDefault()
     }
 
-    const elementDrop = (e) => {
-        e.preventDefault()
-        console.log('Element Dropped!', getDropPosition(dropZoneRef.current, e))
+    updateItemPositionById = (id, pos) => {
+        this.setState({
+            droppedItems: this.state.droppedItems.map((item) => {
+                if(item.id === id) {
+                    item.pos = pos
+                    return item
+                } 
+
+                return item
+            })
+        })
     }
 
-    return (
-        <div 
-            className="cflex full-height form-builder"
-            onDragOver={dragOver}
-            onDragEnter={dragEnter}
-            onDragLeave={dragLeave}
-            onDrop={elementDrop}
-            ref={dropZoneRef}
-            >
-            PlayZone
-        </div>
-    )
+    elementDrop = (e) => {
+        e.preventDefault()
+        
+        let draggedItemData = JSON.parse(e.dataTransfer.getData('text'))
+        let droppedItemPos = getDropPosition(this.dropZoneRef.current, e)
+
+        if(draggedItemData.isNew) {
+            let formElement = getNewformElementObj()
+            formElement.type = draggedItemData.type
+            formElement.id = generateUniqueId()
+            formElement.pos = calculatePositionOfDroppedItem(droppedItemPos, draggedItemData.mousePosition)
+            
+            this.setState(prevState => ({
+                droppedItems: [...prevState.droppedItems, formElement]
+            }))
+
+        } else {
+            let pos = calculatePositionOfDroppedItem(droppedItemPos, draggedItemData.mousePosition)
+            this.updateItemPositionById(draggedItemData.id, pos)
+        }
+    }
+
+    render() {
+        return (
+            <div className="cflex cflex-direction-col full-height form-builder">
+                <TopBar />
+                <div 
+                    className="cflex full-height drop-zone"
+                    onDragOver={this.dragOver}
+                    onDragEnter={this.dragEnter}
+                    onDragLeave={this.dragLeave}
+                    onDrop={this.elementDrop.bind(this)}
+                    ref={this.dropZoneRef}
+                    >
+                        <div>
+                            { this.state.droppedItems.map(item => <DropFromElement key={item.id} item={item} />) }
+                        </div>
+                </div>
+            </div>
+        )
+    }
 }
 
 export default FormBuilder;

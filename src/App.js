@@ -3,7 +3,7 @@ import './normalize.css';
 import './App.css';
 
 import FormBuilder from './formbuilder/FormBuilder'
-import SideBar from './sideBar/SideBar'
+import SideBar from './sidebar/SideBar'
 
 function App() {
   return (

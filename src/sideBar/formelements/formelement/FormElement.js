@@ -1,25 +1,37 @@
 import React from 'react';
 
-const FormElement = () => {
+var getMousePosition = function(rect, e) {
+    return {
+        y: (rect.height - ((rect.top + rect.height) - e.clientY)),
+        x: (rect.width -  ((rect.left + rect.width ) - e.clientX))
+    }
+}
+
+const FormElement = (props) => {
+    let formElementRef = React.createRef();
 
     const dragStart = (e) => {
-        console.log('Element drag start')
-    }
-
-    const dragEnd = (e) => {
-        console.log('Element drag End')
+        var rect = formElementRef.current.getBoundingClientRect()
+        e.dataTransfer.setData('text/plain', JSON.stringify({
+            isNew: true,
+            type: props.item.type,
+            mousePosition: getMousePosition(rect, e)
+        }));
     }
 
     return (
-        <>
-            <li 
-                onDragStart={dragStart}
-                onDragEnd={dragEnd}
-                draggable='true'
-                >
-                Hello world!
-            </li>
-        </>
+        <li 
+            onDragStart={dragStart}
+            draggable='true'
+            ref={formElementRef}
+            >
+            <img 
+                src={ require(`../../../assets/${props.item.imageIconName}.png`) } 
+                alt={props.item.label} 
+                className="img-responsive"
+            />
+            <span>{props.item.label}</span>
+        </li>
     )
 }
 

@@ -1,6 +1,13 @@
 html, body {
   width: 100%;
   height: 100%;
+  background-color: #ecf0f1;
+}
+
+.img-responsive {
+  width: 100%;
+  display: block;
+  margin: auto;
 }
 
 .cflex {
@@ -20,4 +27,76 @@ html, body {
 
 .form-elements {
   flex: 0 0 250px;
+  background-color: #623f78;
+}
+
+.form-elements ul {
+    width: 100%;
+    margin: 0;
+    list-style: none;
+    padding: 8px;
+}
+
+.form-elements ul li {
+    display: block;
+    padding: 8px;
+    background-color: #fff;
+    border-bottom: 1px solid #c5c5c5;
+}
+
+.form-elements ul li:first-child {
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.form-elements ul li:last-child {
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+
+.form-elements ul li img {
+    display: inline-block;
+    vertical-align: top;
+    width: 28px;
+    margin-right: 8px;
+    user-select: none;
+}
+
+.form-elements ul li span {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 14px;
+    padding-top: 6px;
+    font-weight: 400;
+}
+
+.form-builder .drop-zone {
+  position: relative;
+}
+
+.form-item {
+  display: inline-block;
+  padding: 11px;
+  border: 1px solid #be9fd2;
+  border-radius: 3px;
+  user-select: none;
+  min-width: 210px;
+  background-color: #f9f0ff;
+  position: absolute;
+}
+
+.form-item input[type='text'] {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-item.dragging {
+  opacity: 0.2;
+}
+
+.top-bar {
+  flex: 0 0 56px;
+  border-bottom: 1px solid #eeeeee;
+  background-color: #fff;
 }
