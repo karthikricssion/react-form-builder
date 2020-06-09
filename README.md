@@ -10,9 +10,11 @@ Folder structure of the project
 │   ├── button.png
 │   ├── heading.png
 │   └── text-input.png
-├── contentarea
+├── components
 │   ├── FormBuilder.js
 │   ├── FormElement.js
+│   ├── SideBar.js
+│   ├── SideBarFormElement.js
 │   └── TopBar.js
 ├── index.css
 ├── index.js
@@ -20,10 +22,6 @@ Folder structure of the project
 ├── normalize.css
 ├── serviceWorker.js
 ├── setupTests.js
-├── sidebar
-│   ├── SideBar.js
-│   └── formelement
-│       └── FormElement.js
 └── utils.js
 
 ```
