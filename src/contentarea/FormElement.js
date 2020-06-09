@@ -1,13 +1,7 @@
 import React from 'react';
+import { getMousePosition } from '../utils'
 
-var getMousePosition = function(rect, e) {
-    return {
-        y: (rect.height - ((rect.top + rect.height) - e.clientY)),
-        x: (rect.width -  ((rect.left + rect.width ) - e.clientX))
-    }
-}
-
-const DropFormElement = (props) => {
+const FormElement = (props) => {
     let formElementRef = React.createRef();
     const renderElements = (type) => {
         switch(type) {
@@ -50,4 +44,4 @@ const DropFormElement = (props) => {
     )
 }
 
-export default DropFormElement
+export default FormElement

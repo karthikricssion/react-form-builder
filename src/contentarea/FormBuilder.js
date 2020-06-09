@@ -1,6 +1,6 @@
 import React from 'react';
-import TopBar from './topbar/TopBar';
-import DropFromElement from './dropformelement/DropFormElement';
+import TopBar from './TopBar';
+import FromElement from './FormElement';
 
 var getNewformElementObj = function() {
     return {
@@ -124,7 +124,7 @@ class FormBuilder extends React.Component {
                     ref={this.dropZoneRef}
                     >
                         <div>
-                            { this.state.droppedItems.map(item => <DropFromElement key={item.id} item={item} />) }
+                            { this.state.droppedItems.map(item => <FromElement key={item.id} item={item} />) }
                         </div>
                 </div>
             </div>

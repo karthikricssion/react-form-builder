@@ -2,7 +2,7 @@ import React from 'react';
 import './normalize.css';
 import './App.css';
 
-import FormBuilder from './formbuilder/FormBuilder'
+import FormBuilder from './contentarea/FormBuilder'
 import SideBar from './sidebar/SideBar'
 
 function App() {
