@@ -2,23 +2,34 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Folder structure of the project
 ```
-    ├── App.css
-    ├── App.js
-    ├── App.test.js
-    ├── formbuilder
-    │   └── FormBuilder.js
-    ├── index.css
-    ├── index.js
-    ├── logo.svg
-    ├── normalize.css
-    ├── serviceWorker.js
-    ├── setupTests.js
-    └── sideBar
-        ├── SideBar.js
-        └── formelements
-            ├── FormElements.js
-            └── formelement
-                └── FormElement.js
+.
+├── App.css
+├── App.js
+├── App.test.js
+├── assets
+│   ├── button.png
+│   ├── heading.png
+│   └── text-input.png
+├── formbuilder
+│   ├── FormBuilder.js
+│   ├── dropformelement
+│   │   └── DropFormElement.js
+│   └── topbar
+│       └── TopBar.js
+├── index.css
+├── index.js
+├── logo.svg
+├── normalize.css
+├── serviceWorker.js
+├── setupTests.js
+├── sidebar
+│   ├── SideBar.js
+│   └── formelements
+│       ├── FormElements.js
+│       └── formelement
+│           └── FormElement.js
+└── utils.js
+
 ```
 
 ```
