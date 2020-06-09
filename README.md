@@ -10,12 +10,10 @@ Folder structure of the project
 │   ├── button.png
 │   ├── heading.png
 │   └── text-input.png
-├── formbuilder
+├── contentarea
 │   ├── FormBuilder.js
-│   ├── dropformelement
-│   │   └── DropFormElement.js
-│   └── topbar
-│       └── TopBar.js
+│   ├── FormElement.js
+│   └── TopBar.js
 ├── index.css
 ├── index.js
 ├── logo.svg
@@ -24,10 +22,8 @@ Folder structure of the project
 ├── setupTests.js
 ├── sidebar
 │   ├── SideBar.js
-│   └── formelements
-│       ├── FormElements.js
-│       └── formelement
-│           └── FormElement.js
+│   └── formelement
+│       └── FormElement.js
 └── utils.js
 
 ```
