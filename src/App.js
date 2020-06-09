@@ -2,17 +2,14 @@ import React from 'react';
 import './normalize.css';
 import './App.css';
 
+import FormBuilder from './formbuilder/FormBuilder'
+import SideBar from './sideBar/SideBar'
+
 function App() {
   return (
     <div className="cflex full-height">
-      <div className="cflex full-height form-elements">
-        <ul>
-          <li>Header</li>
-          <li>Text Input</li>
-          <li>Button</li>
-        </ul>
-      </div>
-      <div className="cflex full-height form-builder">PlayZone</div>
+      <SideBar />
+      <FormBuilder />
     </div>
   );
 }
