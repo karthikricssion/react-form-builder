@@ -29,7 +29,19 @@
 - Auto saving the changes
 - Sample templates to get started initially 
 
-Folder structure of the project
+### ToDo
+- [x] Try on JS with mouse events
+- [x] Try JS with drag events
+- [x] Data driven form elements
+- [x] Integrate local storage
+- [x] Work on Version 2 design
+- [x] Get started with React
+- [x] Worked on "learn by doing"
+- [x] Come up with project structure
+- [x] Start working on builder using ReactJS
+- [ ] Add comments
+
+### Folder structure of the project
 ```
 .
 ├── App.css
