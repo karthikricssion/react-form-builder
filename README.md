@@ -1,8 +1,7 @@
 
 ## React Form Builder
 
-### Screenshot of final version
-[Demo](https://sad-mclean-051869.netlify.app/)
+### Screenshot of final version - [Demo](https://sad-mclean-051869.netlify.app/)
 ![Final version](./src/assets/final-app.png)
 
 #### How to use
@@ -14,14 +13,10 @@
 ### Component Breakup
 ![Component Breakup](./src/assets/Frame-with-components.png)
 
-### First Version - Pure Javascript ( using mouse events )
-[Demo link](https://laughing-edison-270381.netlify.app/) \
-[Github link](https://github.com/karthikricssion/js-drag-and-drop)
+### First Version - Pure Javascript ( using mouse events ) [Demo link](https://laughing-edison-270381.netlify.app/) -  [Github link](https://github.com/karthikricssion/js-drag-and-drop)
 ![First version js mouse events](./src/assets/version-one.png)
 
-### Second Version - Pure Javascript ( using Drag events )
-[Demo link](https://sharp-lewin-7964ae.netlify.app/) \
-[Github link](https://github.com/karthikricssion/js-drag-and-drop)
+### Second Version - Pure Javascript ( using Drag events ) - [Demo link](https://sharp-lewin-7964ae.netlify.app/) - [Github link](https://github.com/karthikricssion/js-drag-and-drop)
 ![Second version js drag events](./src/assets/version-two.png)
 
 ### Features 
