@@ -10,6 +10,7 @@ var getNewformElementObj = function(type, id, pos) {
         type: type,
         id: id,
         pos: pos,
+        isSelectedId: 0,
         properties: Object.assign({}, PROPERTIES_MAP[type])
     }
 };
@@ -127,13 +128,15 @@ class FormBuilder extends React.Component {
     editElementSettings = (item) => {
         this.setState({
             showElementSettings: true,
-            editElement: item
+            isSelectedId: item.id,
+            editElement: JSON.parse(JSON.stringify(item))
         })
     }
 
     handleElementSettingsCancel = () => {
         this.setState({
-            showElementSettings: false
+            showElementSettings: false,
+            isSelectedId: 0
         })
     }
 
@@ -144,6 +147,16 @@ class FormBuilder extends React.Component {
                     item.properties = properties
                 } 
                 return item
+            })
+        })
+    }
+
+    onDeleteElement = (id) => {
+        this.setState({
+            droppedItems: this.state.droppedItems.filter((item) => item.id !== id ),
+        }, () => {
+            this.setState({
+                showElementSettings: false
             })
         })
     }
@@ -163,21 +176,21 @@ class FormBuilder extends React.Component {
                         <div>
                             { this.state.droppedItems.map((item) => {
                                 return <FromElement 
+                                    isSelectedId={ this.state.isSelectedId }
                                     onClick={ this.editElementSettings } 
+                                    onDeleteElement = { this.onDeleteElement }
                                     key={item.id} 
                                     item={item}
                                 />
                             }) }
                         </div>
-                        {
-                            this.state.showElementSettings && 
-                            <ElementSettings 
-                                item={ this.state.editElement }
-                                show={ this.state.showElementSettings } 
-                                onClickCancel={ this.handleElementSettingsCancel }
-                                onClickUpdate={ this.handleUpdateElementSettings }
-                            />
-                        }
+                        <ElementSettings 
+                            item={ this.state.editElement }
+                            show={ this.state.showElementSettings } 
+                            onClickCancel={ this.handleElementSettingsCancel }
+                            onClickUpdate={ this.handleUpdateElementSettings }
+                        />
+
                 </div>
             </div>
         )

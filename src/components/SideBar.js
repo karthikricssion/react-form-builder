@@ -23,11 +23,15 @@ const SideBar = () => {
 
     return (
         <div className="cflex full-height form-elements">
-            <ul>
-                {formUIElements.map((item, index) =>
-                    <FormElement key={index} item={item} />
-                )}
-            </ul>
+            <div className="form-elements-inner">
+                <h4 className="form-app-logo">Form Builder</h4>
+                <h4>Form Elements</h4>
+                <ul>
+                    {formUIElements.map((item, index) =>
+                        <FormElement key={index} item={item} />
+                    )}
+                </ul>
+            </div>
         </div>
     )
 }

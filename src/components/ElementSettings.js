@@ -2,15 +2,11 @@ import React from 'react';
 import { INPUT_TYPES, LABEL_ELEMENTS } from '../const';
 
 class InputProperties extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = JSON.parse(JSON.stringify(props.formElement.properties))
-    }
-
     updateOnChange = (event) => {
-        this.setState({ placeholder: event.target.value }, () => {
-            this.props.onClickUpdate(this.state, this.props.formElement.id)
-        })
+        console.log(event.target.value)
+        this.props.onUpdate({
+            placeholder: event.target.value
+        }, this.props.formElement.id)
     }
 
     render() {
@@ -18,7 +14,7 @@ class InputProperties extends React.Component {
             <>
                 <label>Placeholder</label>
                 <input type="text" 
-                    value={this.state.placeholder}
+                    defaultValue={this.props.formElement.properties.placeholder}
                     onChange={this.updateOnChange.bind(this) } 
                 />
             </>
@@ -27,15 +23,10 @@ class InputProperties extends React.Component {
 }
 
 class ButtonProperties extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = JSON.parse(JSON.stringify(props.formElement.properties))
-    }
-
     updateOnChange = (event) => {
-        this.setState({ name: event.target.value }, () => {
-            this.props.onClickUpdate(this.state, this.props.formElement.id)
-        })
+        this.props.onUpdate({
+            name: event.target.value
+        }, this.props.formElement.id)
     }
 
     render() {
@@ -43,7 +34,7 @@ class ButtonProperties extends React.Component {
             <>
                 <label>Button Text</label>
                 <input type="text" 
-                    value={this.state.name}
+                    defaultValue={this.props.formElement.properties.name}
                     onChange={this.updateOnChange.bind(this) } 
                 />
             </>
@@ -52,15 +43,10 @@ class ButtonProperties extends React.Component {
 }
 
 class LabelProperties extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = JSON.parse(JSON.stringify(props.formElement.properties))
-    }
-
     updateOnChange = (event) => {
-        this.setState({ name: event.target.value }, () => {
-            this.props.onClickUpdate(this.state, this.props.formElement.id)
-        })
+        this.props.onUpdate({
+            name: event.target.value
+        }, this.props.formElement.id)
     }
 
     render() {
@@ -68,7 +54,7 @@ class LabelProperties extends React.Component {
             <>
                 <label>Text</label>
                 <input type="text" 
-                    value={this.state.name}
+                    defaultValue={this.props.formElement.properties.name}
                     onChange={this.updateOnChange.bind(this) } 
                 />
             </>
@@ -92,24 +78,28 @@ const ElementSettings = (props) => {
         props.onClickCancel()
     }
 
-    return (
-        <div className={ ` element-settings-slider ${props.show ? 'show' : ''}` }>  
-
-            <h4>
-                { LABEL_ELEMENTS[props.item.type] } Properties
-                <span className="close-btn" onClick={ handleCancel } >X</span>
-            </h4>
-
-            <div className="settings-form">
-                {   
-                    <ElementProperties 
-                        onClickUpdate={ handleUpdateSetting } 
-                        formElement={props.item} 
-                    /> 
-                }
+    if(props.show) {
+        return (
+            <div className={ ` element-settings-slider ${props.show ? 'show' : ''}` }>  
+                <h4>
+                    { LABEL_ELEMENTS[props.item.type] } Properties
+                    <span className="close-btn" onClick={ handleCancel } >X</span>
+                </h4>
+    
+                <div className="settings-form">
+                    {   
+                        <ElementProperties 
+                            onUpdate={ handleUpdateSetting } 
+                            formElement={props.item} 
+                            key={props.item.id}
+                        /> 
+                    }
+                </div>
             </div>
-        </div>
-    )
+        )       
+    } else {
+        return null
+    }
 }
 
 export default ElementSettings

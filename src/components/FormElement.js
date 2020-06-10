@@ -27,10 +27,14 @@ const FormElement = (props) => {
     const dragEnd = (e) => {
         formElementRef.current.classList.remove('dragging')
     }
+
+    const onDeleteElement = () => {
+        props.onDeleteElement(props.item.id)
+    }
     
     return (
         <div 
-            className="form-item"
+            className={`form-item ${ props.isSelectedId === props.item.id ? 'selected' : '' } `}
             draggable="true"
             onDragStart={dragStart}
             onDragEnd={dragEnd}
@@ -39,9 +43,13 @@ const FormElement = (props) => {
                 left: `${props.item.pos.x}px`,
             }}
             ref={formElementRef}
-            onClick={ () => props.onClick(props.item) }
+            onClick={ function() {
+                return props.onClick(props.item)
+            }}
             > 
             { renderElements(props.item.type) }
+
+            <span onClick={ onDeleteElement } className="delete-icon">x</span>
         </div>
     )
 }
