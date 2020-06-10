@@ -20,7 +20,7 @@
 ![Second version js drag events](./src/assets/version-two.png)
 
 ### Thoughts on Features
-- Add more properties
+- Add more Form elements
 - Add more properties for each form elements eg: add labels to a short text, required, hit message, etc.,
 - Add Redux for maintaining state
 - Create a timeline of user changes, so the user can undo changes
