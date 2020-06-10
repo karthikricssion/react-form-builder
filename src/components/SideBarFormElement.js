@@ -3,7 +3,7 @@ import { getMousePosition } from '../utils';
 
 const SideBarFormElement = (props) => {
     let formElementRef = React.createRef();
-
+    
     const dragStart = (e) => {
         var rect = formElementRef.current.getBoundingClientRect()
         e.dataTransfer.setData('text/plain', JSON.stringify({
