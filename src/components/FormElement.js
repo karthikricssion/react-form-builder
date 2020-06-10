@@ -1,13 +1,15 @@
 import React from 'react';
 import { getMousePosition } from '../utils'
+import { INPUT_TYPES } from '../const';
 
 const FormElement = (props) => {
     let formElementRef = React.createRef();
     const renderElements = (type) => {
+        
         switch(type) {
-            case 'text': return <label>Header</label>;
-            case 'inputText': return <input type="text" />;
-            case 'button': return <button>Button</button>;
+            case INPUT_TYPES.LABEL: return <label>{ props.item.properties.name }</label>;
+            case INPUT_TYPES.TEXT_INPUT: return <input type="text" placeholder={ props.item.properties.placeholder } />;
+            case INPUT_TYPES.BUTTON: return <button>{ props.item.properties.name }</button>;
             default: return null
         }
     }
@@ -23,7 +25,6 @@ const FormElement = (props) => {
     }
 
     const dragEnd = (e) => {
-        // console.log('drag-end')
         formElementRef.current.classList.remove('dragging')
     }
     
@@ -38,6 +39,7 @@ const FormElement = (props) => {
                 left: `${props.item.pos.x}px`,
             }}
             ref={formElementRef}
+            onClick={ () => props.onClick(props.item) }
             > 
             { renderElements(props.item.type) }
         </div>

@@ -1,20 +1,21 @@
 import React from 'react';
+import { INPUT_TYPES } from '../const';
 import FormElement from './SideBarFormElement'
 
 const SideBar = () => {
     const formUIElements = [
         {
-            type: 'text',
-            label: 'Header',
+            type: INPUT_TYPES.LABEL,
+            label: 'Label',
             imageIconName: 'heading'
         },
         {
-            type: 'inputText',
-            label: 'Text Field',
+            type: INPUT_TYPES.TEXT_INPUT,
+            label: 'Short Text',
             imageIconName: 'text-input'
         },
         {
-            type: 'button',
+            type: INPUT_TYPES.BUTTON,
             label: 'Button',
             imageIconName: 'button'
         }

@@ -1,21 +1,22 @@
 import React from 'react';
 import TopBar from './TopBar';
 import FromElement from './FormElement';
+import ElementSettings from './ElementSettings';
+import { PROPERTIES_MAP } from  '../const';
+import { saveFormInLocalStorage, getFormInLocalStorage, resetFormDatainLocalStorage } from '../utils';
 
-var getNewformElementObj = function() {
+var getNewformElementObj = function(type, id, pos) {
     return {
-        type: '',
-        pos: {
-            x: 0,
-            y: 0
-        }
+        type: type,
+        id: id,
+        pos: pos,
+        properties: Object.assign({}, PROPERTIES_MAP[type])
     }
-}
+};
 
 var generateUniqueId = function() {
     return Math.ceil(Math.random() * 10000000)
-}
-
+};
 
 var getDropPosition = function($this, e) {
     return {
@@ -37,6 +38,7 @@ var calculatePositionOfDroppedItem = function(droppedItemPosition, draggedItemPo
     var xPosition = (droppedItemPosition.x - draggedItemPosition.x)
     var yPosition = (droppedItemPosition.y - draggedItemPosition.y )
 
+    // Add comments
     if(xPosition < 0) {
         xPosition = 8
     } else if((xPosition + dropItemMeasurement.width) > droppedItemPosition.width) {
@@ -53,14 +55,16 @@ var calculatePositionOfDroppedItem = function(droppedItemPosition, draggedItemPo
         x: xPosition,
         y: yPosition
     }
-}
+};
 
 class FormBuilder extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
-            droppedItems: []
-        }
+            droppedItems: getFormInLocalStorage(),
+            showElementSettings: false,
+            editElement: {}
+        };
         this.dropZoneRef = React.createRef();
     }
 
@@ -81,25 +85,23 @@ class FormBuilder extends React.Component {
             droppedItems: this.state.droppedItems.map((item) => {
                 if(item.id === id) {
                     item.pos = pos
-                    return item
                 } 
-
                 return item
             })
         })
     }
 
-    elementDrop = (e) => {
+    handleDroppedElement = (e) => {
         e.preventDefault()
         
         let draggedItemData = JSON.parse(e.dataTransfer.getData('text'))
         let droppedItemPos = getDropPosition(this.dropZoneRef.current, e)
 
         if(draggedItemData.isNew) {
-            let formElement = getNewformElementObj()
-            formElement.type = draggedItemData.type
-            formElement.id = generateUniqueId()
-            formElement.pos = calculatePositionOfDroppedItem(droppedItemPos, draggedItemData.mousePosition)
+            let type = draggedItemData.type
+            let uniqeId = generateUniqueId()
+            let position = calculatePositionOfDroppedItem(droppedItemPos, draggedItemData.mousePosition)
+            let formElement = getNewformElementObj(type, uniqeId, position)
             
             this.setState(prevState => ({
                 droppedItems: [...prevState.droppedItems, formElement]
@@ -111,21 +113,71 @@ class FormBuilder extends React.Component {
         }
     }
 
+    handleSave = () => {
+        saveFormInLocalStorage(this.state.droppedItems)
+    }
+
+    handleReset = () => {
+        resetFormDatainLocalStorage()
+        this.setState({
+            droppedItems: []
+        })
+    }
+
+    editElementSettings = (item) => {
+        this.setState({
+            showElementSettings: true,
+            editElement: item
+        })
+    }
+
+    handleElementSettingsCancel = () => {
+        this.setState({
+            showElementSettings: false
+        })
+    }
+
+    handleUpdateElementSettings = (id, properties) => {
+        this.setState({
+            droppedItems: this.state.droppedItems.map((item) => {
+                if(item.id === id) {
+                    item.properties = properties
+                } 
+                return item
+            })
+        })
+    }
+
     render() {
         return (
             <div className="cflex cflex-direction-col full-height form-builder">
-                <TopBar />
+                <TopBar onClickSave={ this.handleSave }  onClickReset={ this.handleReset }/>
                 <div 
                     className="cflex full-height drop-zone"
                     onDragOver={this.dragOver}
                     onDragEnter={this.dragEnter}
                     onDragLeave={this.dragLeave}
-                    onDrop={this.elementDrop.bind(this)}
+                    onDrop={this.handleDroppedElement.bind(this)}
                     ref={this.dropZoneRef}
                     >
                         <div>
-                            { this.state.droppedItems.map(item => <FromElement key={item.id} item={item} />) }
+                            { this.state.droppedItems.map((item) => {
+                                return <FromElement 
+                                    onClick={ this.editElementSettings } 
+                                    key={item.id} 
+                                    item={item}
+                                />
+                            }) }
                         </div>
+                        {
+                            this.state.showElementSettings && 
+                            <ElementSettings 
+                                item={ this.state.editElement }
+                                show={ this.state.showElementSettings } 
+                                onClickCancel={ this.handleElementSettingsCancel }
+                                onClickUpdate={ this.handleUpdateElementSettings }
+                            />
+                        }
                 </div>
             </div>
         )
@@ -133,3 +185,4 @@ class FormBuilder extends React.Component {
 }
 
 export default FormBuilder;
+ 

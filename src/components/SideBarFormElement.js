@@ -1,7 +1,7 @@
 import React from 'react';
 import { getMousePosition } from '../utils';
 
-const FormElement = (props) => {
+const SideBarFormElement = (props) => {
     let formElementRef = React.createRef();
 
     const dragStart = (e) => {
@@ -29,4 +29,4 @@ const FormElement = (props) => {
     )
 }
 
-export default FormElement
+export default SideBarFormElement

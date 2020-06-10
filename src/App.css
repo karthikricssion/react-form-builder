@@ -2,6 +2,7 @@ html, body {
   width: 100%;
   height: 100%;
   background-color: #ecf0f1;
+  overflow: hidden;
 }
 
 .img-responsive {
@@ -84,6 +85,7 @@ html, body {
   min-width: 210px;
   background-color: #f9f0ff;
   position: absolute;
+  cursor: pointer;
 }
 
 .form-item input[type='text'] {
@@ -96,16 +98,18 @@ html, body {
 }
 
 .top-bar {
-  flex: 0 0 56px;
+  flex: 0 0 48px;
   border-bottom: 1px solid #eeeeee;
   background-color: #fff;
   text-align: right;
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.14), 0 0 2px 2px rgba(0, 0, 0, 0.098), 0 0 5px 1px rgba(0, 0, 0, 0.084);
+  z-index: 1;
 }
 
 .btn-primary {
   border: 2px solid #613e78;
   color: #fff;
-  padding: 8px 16px;
+  padding: 4px 12px;
   background-color: #613e78;
   border-radius: 5px;
   margin-right: 8px;
@@ -125,4 +129,63 @@ html, body {
 
 .btn-primary.cancel:hover {
   background-color: #eaeaea;
+}
+
+.element-settings-slider {
+  position: absolute;
+  width: 250px;
+  top: 0;
+  right: -251px;
+  bottom: 0;
+  background-color: #3e4652;
+  transition: all 0.5s ease;
+  color: #fff;
+}
+
+.element-settings-slider.show {
+  right: 0;
+}
+
+.element-settings-slider h4 {
+  margin: 0;
+  padding: 16px;
+  background-color: #000;
+  position: relative;
+}
+
+.element-settings-slider h4 .close-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: center;
+    font-size: 18px;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.element-settings-slider .settings-form {
+  padding: 16px;
+}
+
+.element-settings-slider label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.element-settings-slider input[type="text"] {
+    background: #535f70;
+    border-color: #2f333a;
+    color: #fff;
+    padding: 6px 12px;
+    border: 1px solid #2f333a;
+    margin: 0;
+    width: 100%;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+.element-settings-slider .settings-actions {
+  text-align: right;
 }

@@ -1,10 +1,10 @@
 import React from 'react';
 
-const TopBar = () => {
+const TopBar = (props) => {
     return (
         <div className="top-bar">
-            <button className="btn-primary cancel">Reset</button>
-            <button className="btn-primary">Save</button>
+            <button onClick={ () =>  props.onClickReset() } className="btn-primary cancel">Reset</button>
+            <button onClick={ () => props.onClickSave() } className="btn-primary">Save</button>
         </div>
     )
 }
